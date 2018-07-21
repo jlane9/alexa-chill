@@ -1,0 +1,9 @@
+{
+    "dev": {
+        "app_function": "chill.app",
+        "profile_name": "default",
+        "project_name": "alexa-chill",
+        "runtime": "python3.6",
+        "s3_bucket": "zappa-chill"
+    }
+}

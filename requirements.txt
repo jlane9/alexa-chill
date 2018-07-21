@@ -1,0 +1,4 @@
+awscli>=1.15.39
+requests>=2.19.0
+flask-ask>=0.9.8
+zappa>=0.46.0
