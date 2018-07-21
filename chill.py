@@ -34,14 +34,25 @@ def help_me():
 @ask.intent("AMAZON.FallbackIntent")
 def fallback():
 
-    expert = random.choice(['Kevin', 'Jesse', 'Jason Cameron', 'Nick Kline'])
-    return statement(render_template('fallback.html', expert=expert))
+    return statement("Fallback")
 
 
 @ask.intent("AMAZON.CancelIntent")
 def cancel():
 
-    return statement(render_template('cancel.html'))
+    return statement("ok, I'll stop working on that")
+
+
+@ask.intent("AMAZON.MovieRecommendationIntent")
+def movie_recommend():
+
+    return statement(render_template(movie_recommend.html))
+
+
+@ask.intent("AMAZON.ShowRecommendationIntent")
+def show_recommend():
+
+    return statement(render_template(show_recommend.html))
 
 
 if __name__ == "__main__":
