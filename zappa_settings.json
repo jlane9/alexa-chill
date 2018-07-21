@@ -1,6 +1,7 @@
 {
     "dev": {
         "app_function": "chill.app",
+        "aws_region": "us-east-1",
         "profile_name": "default",
         "project_name": "alexa-chill",
         "runtime": "python3.6",
