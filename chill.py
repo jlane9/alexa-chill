@@ -51,7 +51,7 @@ def fallback():
 @ask.intent("AMAZON.CancelIntent")
 def cancel():
 
-    return statement("ok, I'll stop working on that")
+    return statement("ok, enjoy your day")
 
 
 @ask.intent("MovieRecommendationIntent")
