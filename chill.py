@@ -18,16 +18,22 @@ ask = Ask(app, "/")
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 
-# TODO: We'll work on this later
-def get_movie_recommendation(**kwargs):
-    response = requests.post("/api/movies/recommendation", json=kwargs)
-    return response
+def get_watchlist_movie_recommendation(**kwargs):
+    response = requests.post("http://178.128.78.151:8000/api/watchlist-movie/recommendation/", json=kwargs)
+
+    if response.ok:
+        return response.json()[0]["movie_title"]
+
+    return ""
 
 
+def get_watchlist_show_recommendation(**kwargs):
+    response = requests.post("http://178.128.78.151:8000/api/watchlist-show/recommendation/", json=kwargs)
 
+    if response.ok:
+        return response.json()[0]["show_title"]
 
-
-
+    return ""
 
 
 @ask.launch
@@ -57,8 +63,8 @@ def cancel():
 @ask.intent("MovieRecommendationIntent")
 def get_movie_recommend():
 
-    recommended_title = "Fight Club"
-    return question(render_template("movie_recommend.html", title=recommended_title))
+    recommended_title = get_watchlist_movie_recommendation(friends=["jrgoodle"])
+    return statement(render_template("movie_recommend.html", title=recommended_title))
 
 
 @ask.intent("MovieGenreIntent")
