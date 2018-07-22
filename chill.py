@@ -18,9 +18,11 @@ app = Flask(__name__)
 ask = Ask(app, "/")
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
+auth = ('root', '!5I$KrM&IajxxU6q')
+
 
 def get_watchlist_movie_recommendation(**kwargs):
-    response = requests.post("http://178.128.78.151:8000/api/watchlist-movie/recommendation/", json=kwargs)
+    response = requests.post("http://178.128.78.151:8000/api/watchlist-movie/recommendation/", json=kwargs, auth=auth)
 
     if response.ok:
         return random.choice(response.json())["movie_title"]
@@ -29,7 +31,7 @@ def get_watchlist_movie_recommendation(**kwargs):
 
 
 def get_watchlist_show_recommendation(**kwargs):
-    response = requests.post("http://178.128.78.151:8000/api/watchlist-show/recommendation/", json=kwargs)
+    response = requests.post("http://178.128.78.151:8000/api/watchlist-show/recommendation/", json=kwargs, auth=auth)
 
     if response.ok:
         return random.choice(response.json())["show_title"]
