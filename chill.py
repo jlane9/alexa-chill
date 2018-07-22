@@ -11,6 +11,7 @@ import logging
 import requests
 from flask import Flask, render_template
 from flask_ask import Ask, statement, session,  question, request
+import random
 
 
 app = Flask(__name__)
@@ -22,7 +23,7 @@ def get_watchlist_movie_recommendation(**kwargs):
     response = requests.post("http://178.128.78.151:8000/api/watchlist-movie/recommendation/", json=kwargs)
 
     if response.ok:
-        return response.json()[0]["movie_title"]
+        return random.choice(response.json())["movie_title"]
 
     return ""
 
@@ -31,7 +32,7 @@ def get_watchlist_show_recommendation(**kwargs):
     response = requests.post("http://178.128.78.151:8000/api/watchlist-show/recommendation/", json=kwargs)
 
     if response.ok:
-        return response.json()[0]["show_title"]
+        return random.choice(response.json())["show_title"]
 
     return ""
 
@@ -83,7 +84,8 @@ def get_not_watched_movie(boolean):
 @ask.intent("WatchedMovieIntent")
 def get_watched_movie(boolean):
 
-    return statement(render_template("watched_movie.html", title="Harry Potter"))
+    recommended_title = get_watchlist_movie_recommendation(friends=["jrgoodle"])
+    return statement(render_template("watched_movie.html", title=recommended_title))
 
 
 @ask.intent("NotWatchedMovieActorIntent")
